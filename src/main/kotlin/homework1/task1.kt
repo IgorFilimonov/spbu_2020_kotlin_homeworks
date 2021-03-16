@@ -2,7 +2,7 @@ package homework1
 
 import kotlin.system.exitProcess
 
-fun readNumber() : Int {
+fun readNumber(): Int {
     println("Enter an integer non-negative number:")
     val number = readLine()?.toIntOrNull()
     if (number == null || number < 0) {
@@ -12,13 +12,14 @@ fun readNumber() : Int {
     return number
 }
 
-fun computeFactorialRecursive(number: Int) : Int {
-    if (number == 0)
+fun computeFactorialRecursive(number: Int): Int {
+    if (number == 0) {
         return 1
+    }
     return computeFactorialRecursive(number - 1) * number
 }
 
-fun computeFactorialIterative(number: Int) : Int {
+fun computeFactorialIterative(number: Int): Int {
     var factorial = 1
     for (i in 2..number)
         factorial *= i
