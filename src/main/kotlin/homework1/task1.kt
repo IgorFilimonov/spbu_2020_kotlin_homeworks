@@ -8,7 +8,7 @@ fun readNumber() : Int
     val number = readLine()?.toIntOrNull()
     if (number == null || number < 0) {
         println("It's not a non-negative integer")
-        exitProcess(1)
+        exitProcess(-1)
     }
     return number
 }
@@ -16,7 +16,7 @@ fun readNumber() : Int
 fun computeFactorialRecursive(number: Int) : Int
 {
     if (number == 0)
-        return 1;
+        return 1
     return computeFactorialRecursive(number - 1) * number
 }
 
