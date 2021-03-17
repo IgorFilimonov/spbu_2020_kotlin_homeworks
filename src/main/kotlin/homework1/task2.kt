@@ -4,10 +4,12 @@ fun findOccurrences(string1: String, string2: String): Int {
     var numberOfOccurrences = 0
     for (i in string1.indices) {
         for (j in string2.indices) {
-            if (i + j >= string1.length || string1[i + j] != string2[j])
+            if (i + j >= string1.length || string1[i + j] != string2[j]) {
                 break
-            if (j + 1 == string2.length)
+            }
+            if (j + 1 == string2.length) {
                 ++numberOfOccurrences
+            }
         }
     }
     return numberOfOccurrences
