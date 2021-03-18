@@ -1,4 +1,4 @@
-package homework1.PerformedCommandStorage
+package homework1
 
 class PerformedCommandStorage {
     var numbers = mutableListOf<Int>()
