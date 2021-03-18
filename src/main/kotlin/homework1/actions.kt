@@ -51,7 +51,7 @@ class MoveElement() : Action {
     private lateinit var storage: PerformedCommandStorage
     // The line with the primary constructor was too long
 
-    constructor(startIndex: Int?, endIndex: Int?, storage: PerformedCommandStorage) {
+    constructor(startIndex: Int?, endIndex: Int?, storage: PerformedCommandStorage) : this() {
         this.startIndex = startIndex
         this.endIndex = endIndex
         this.storage = storage
