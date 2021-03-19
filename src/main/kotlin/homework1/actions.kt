@@ -5,15 +5,9 @@ interface Action {
     fun cancel()
 }
 
-class AddToBeginning(private val value: Int?, private val storage: PerformedCommandStorage) : Action {
-    init {
-        if (value == null) {
-            throw IllegalArgumentException("This is not an integer")
-        }
-    }
-
+class AddToBeginning(private val value: Int, private val storage: PerformedCommandStorage) : Action {
     override fun perform() {
-        storage.numbers.add(0, value!!.toInt())
+        storage.numbers.add(0, value)
         storage.performAction(this)
     }
 
@@ -22,15 +16,9 @@ class AddToBeginning(private val value: Int?, private val storage: PerformedComm
     }
 }
 
-class AddToEnd(private val value: Int?, private val storage: PerformedCommandStorage) : Action {
-    init {
-        if (value == null) {
-            throw IllegalArgumentException("This is not an integer")
-        }
-    }
-
+class AddToEnd(private val value: Int, private val storage: PerformedCommandStorage) : Action {
     override fun perform() {
-        storage.numbers.add(value!!.toInt())
+        storage.numbers.add(value)
         storage.performAction(this)
     }
 
@@ -39,39 +27,22 @@ class AddToEnd(private val value: Int?, private val storage: PerformedCommandSto
     }
 }
 
-private fun move(startIndex: Int, endIndex: Int, storage: PerformedCommandStorage) {
-    val element = storage.numbers[startIndex]
-    storage.numbers.removeAt(startIndex)
-    storage.numbers.add(endIndex, element)
+private fun moveNumbers(startIndex: Int, endIndex: Int, numbers: MutableList<Int>) {
+    if (startIndex !in numbers.indices || endIndex !in numbers.indices) {
+        throw ArrayIndexOutOfBoundsException("Invalid indices")
+    }
+    val element = numbers[startIndex]
+    numbers.removeAt(startIndex)
+    numbers.add(endIndex, element)
 }
 
-class MoveElement() : Action {
-    private var startIndex: Int? = null
-    private var endIndex: Int? = null
-    private lateinit var storage: PerformedCommandStorage
-    // The line with the primary constructor was too long
-
-    constructor(startIndex: Int?, endIndex: Int?, storage: PerformedCommandStorage) : this() {
-        this.startIndex = startIndex
-        this.endIndex = endIndex
-        this.storage = storage
-    }
-
-    init {
-        if (startIndex == null || endIndex == null) {
-            throw IllegalArgumentException("This is not an integer")
-        }
-        if (startIndex !in storage.numbers.indices || endIndex !in storage.numbers.indices) {
-            throw ArrayIndexOutOfBoundsException("Invalid indices")
-        }
-    }
-
+class Move(private val from: Int, private val to: Int, private val storage: PerformedCommandStorage) : Action {
     override fun perform() {
-        move(startIndex!!.toInt(), endIndex!!.toInt(), storage)
+        moveNumbers(from, to, storage.numbers)
         storage.performAction(this)
     }
 
     override fun cancel() {
-        move(endIndex!!.toInt(), startIndex!!.toInt(), storage)
+        moveNumbers(from, to, storage.numbers)
     }
 }

@@ -11,40 +11,28 @@ fun displayHints() {
             "To select, enter the command number:")
 }
 
-const val COMMAND_TYPE1 = 1
-const val COMMAND_TYPE2 = 2
-const val COMMAND_TYPE3 = 3
-const val COMMAND_TYPE4 = 4
-const val COMMAND_TYPE5 = 5
+const val ADD_TO_BEGINNING = 1
+const val ADD_TO_END = 2
+const val MOVE_ELEMENT = 3
+const val CANCEL_ACTION = 4
+const val PRINT_NUMBERS = 5
+
+fun numberInput(message: String): Int {
+    println(message)
+    return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("This is not an integer")
+}
 
 fun executeCommand(typeOfCommand: Int?, storage: PerformedCommandStorage) {
     when (typeOfCommand) {
-        COMMAND_TYPE1 -> {
-            println("Enter value:")
-            val value = readLine()?.toIntOrNull()
-            AddToBeginning(value, storage).perform()
-        }
-        COMMAND_TYPE2 -> {
-            println("Enter value:")
-            val value = readLine()?.toIntOrNull()
-            AddToEnd(value, storage).perform()
-        }
-        COMMAND_TYPE3 -> {
-            println("Enter start index:")
-            val startIndex = readLine()?.toIntOrNull()
-            println("Enter end index:")
-            val endIndex = readLine()?.toIntOrNull()
-            MoveElement(startIndex, endIndex, storage).perform()
-        }
-        COMMAND_TYPE4 -> {
-            storage.cancelAction()
-        }
-        COMMAND_TYPE5 -> {
+        ADD_TO_BEGINNING -> AddToBeginning(numberInput("Enter value:"), storage).perform()
+        ADD_TO_END -> AddToEnd(numberInput("Enter value:"), storage).perform()
+        MOVE_ELEMENT -> Move(numberInput("Enter start index:"), numberInput("Enter end index:"), storage).perform()
+        CANCEL_ACTION -> storage.cancelAction()
+        PRINT_NUMBERS -> {
             println("Numbers:")
             storage.printNumbers()
         }
-        null -> throw IllegalArgumentException("This is not an integer")
-        else -> {}
+        else -> throw IllegalArgumentException("This is not an integer")
     }
 }
 
@@ -54,6 +42,8 @@ fun main() {
     while (command != 0) {
         displayHints()
         command = readLine()?.toIntOrNull()
-        executeCommand(command, storage)
+        if (command != 0) {
+            executeCommand(command, storage)
+        }
     }
 }
