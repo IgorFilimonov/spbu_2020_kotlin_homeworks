@@ -27,22 +27,22 @@ class AddToEnd(private val value: Int, private val storage: PerformedCommandStor
     }
 }
 
-private fun moveNumbers(startIndex: Int, endIndex: Int, numbers: MutableList<Int>) {
-    if (startIndex !in numbers.indices || endIndex !in numbers.indices) {
-        throw ArrayIndexOutOfBoundsException("Invalid indices")
-    }
-    val element = numbers[startIndex]
-    numbers.removeAt(startIndex)
-    numbers.add(endIndex, element)
-}
-
 class Move(private val from: Int, private val to: Int, private val storage: PerformedCommandStorage) : Action {
+    private fun moveNumbers(startIndex: Int, endIndex: Int, numbers: MutableList<Int>) {
+        if (startIndex !in numbers.indices || endIndex !in numbers.indices) {
+            throw ArrayIndexOutOfBoundsException("Invalid indices")
+        }
+        val element = numbers[startIndex]
+        numbers.removeAt(startIndex)
+        numbers.add(endIndex, element)
+    }
+
     override fun perform() {
         moveNumbers(from, to, storage.numbers)
         storage.performAction(this)
     }
 
     override fun cancel() {
-        moveNumbers(from, to, storage.numbers)
+        moveNumbers(to, from, storage.numbers)
     }
 }
