@@ -2,9 +2,9 @@ package homework2
 
 fun readArray(): IntArray {
     println("Enter the size of the array:")
-    val size = readLine()?.toIntOrNull() ?: throw IllegalArgumentException("This is not an integer")
-    if (size < 0) {
-        throw NegativeArraySizeException("Array size cannot be negative")
+    val size = readLine()?.toIntOrNull()
+    if (size == null || size <= 0) {
+        throw IllegalArgumentException("Invalid array size")
     }
     val numbers = IntArray(size)
 
@@ -20,7 +20,7 @@ fun readArray(): IntArray {
     return numbers
 }
 
-fun IntArray.removeDublicates(): IntArray {
+fun IntArray.removeDuplicates(): IntArray {
     val set = mutableSetOf<Int>()
     set.addAll(this.toTypedArray().reversedArray())
     return set.toIntArray().reversedArray()
@@ -28,6 +28,6 @@ fun IntArray.removeDublicates(): IntArray {
 
 fun main() {
     var numbers = readArray()
-    numbers = numbers.removeDublicates()
+    numbers = numbers.removeDuplicates()
     println("Numbers:\n${numbers.joinToString(" ")}")
 }
