@@ -11,12 +11,12 @@ fun displayHints() {
             "To select, enter the command number:")
 }
 
-enum class Commands(val value: Int) {
-    ADD_TO_BEGINNING(1),
-    ADD_TO_END(2),
-    MOVE(3),
-    CANCEL_ACTION(4),
-    PRINT_NUMBERS(5)
+enum class Commands {
+    ADD_TO_BEGINNING,
+    ADD_TO_END,
+    MOVE,
+    CANCEL_ACTION,
+    PRINT_NUMBERS
 }
 
 fun intInput(message: String): Int {
@@ -24,17 +24,17 @@ fun intInput(message: String): Int {
     return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("This is not an integer")
 }
 
-fun executeCommand(typeOfCommand: Int?, storage: PerformedCommandStorage) {
-    when (typeOfCommand) {
-        Commands.ADD_TO_BEGINNING.value -> AddToBeginning(intInput("Enter value:"), storage).perform()
-        Commands.ADD_TO_END.value -> AddToEnd(intInput("Enter value:"), storage).perform()
-        Commands.MOVE.value -> Move(intInput("Enter start index:"), intInput("Enter end index:"), storage).perform()
-        Commands.CANCEL_ACTION.value -> storage.cancelAction()
-        Commands.PRINT_NUMBERS.value -> {
+fun executeCommand(typeOfCommand: Int, storage: PerformedCommandStorage) {
+    when (typeOfCommand - 1) {
+        Commands.ADD_TO_BEGINNING.ordinal -> AddToBeginning(intInput("Enter value:"), storage).perform()
+        Commands.ADD_TO_END.ordinal -> AddToEnd(intInput("Enter value:"), storage).perform()
+        Commands.MOVE.ordinal -> Move(intInput("Enter start index:"), intInput("Enter end index:"), storage).perform()
+        Commands.CANCEL_ACTION.ordinal -> storage.cancelAction()
+        Commands.PRINT_NUMBERS.ordinal -> {
             println("Numbers:")
             storage.printNumbers()
         }
-        else -> throw IllegalArgumentException("This is not an integer")
+        else -> throw IllegalArgumentException("Invalid command")
     }
 }
 
@@ -43,7 +43,7 @@ fun main() {
     val storage = PerformedCommandStorage()
     while (command != 0) {
         displayHints()
-        command = readLine()?.toIntOrNull()
+        command = readLine()?.toIntOrNull() ?: throw IllegalArgumentException("This is not an integer")
         if (command != 0) {
             executeCommand(command, storage)
         }
