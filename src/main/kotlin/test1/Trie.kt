@@ -8,16 +8,18 @@ class Node {
     fun goBySymbol(symbol: Char): Node {
         val crutch = transitions[0].first
         for (transition in transitions) {
-            if (transition.second == symbol)
+            if (transition.second == symbol) {
                 return transition.first
+            }
         }
         return crutch // never will be existed
     }
 
     fun findTransition(symbol: Char): Boolean {
         for (transition in transitions) {
-            if (transition.second == symbol)
+            if (transition.second == symbol) {
                 return true
+            }
         }
         return false
     }
@@ -58,8 +60,9 @@ class Trie(private val root: Node) {
     fun contains(element: String): Boolean {
         var currentNode = root
         for (symbol in element) {
-            if (!currentNode.findTransition(symbol))
+            if (!currentNode.findTransition(symbol)) {
                 return false
+            }
             currentNode = currentNode.goBySymbol(symbol)
         }
         return currentNode.isTerminal()
@@ -68,8 +71,9 @@ class Trie(private val root: Node) {
     fun remove(element: String): Boolean {
         var currentNode = root
         for (symbol in element) {
-            if (!currentNode.findTransition(symbol))
+            if (!currentNode.findTransition(symbol)) {
                 return false
+            }
             currentNode = currentNode.goBySymbol(symbol)
         }
         return if (currentNode.isTerminal()) {
@@ -87,8 +91,9 @@ class Trie(private val root: Node) {
     fun howManyStartWithPrefix(prefix: String): Int {
         var currentNode = root
         for (symbol in prefix) {
-            if (!currentNode.findTransition(symbol))
+            if (!currentNode.findTransition(symbol)) {
                 return 0
+            }
             currentNode = currentNode.goBySymbol(symbol)
         }
         return currentNode.getNumberOfPrefixes()

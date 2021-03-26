@@ -37,7 +37,6 @@ fun executeCommand(typeOfCommand: Int, trie: Trie) {
             } else {
                 println("This element is missing")
             }
-
         }
         Commands.REMOVE.ordinal -> {
             if (!trie.remove(stringInput("Enter the string:"))) {
