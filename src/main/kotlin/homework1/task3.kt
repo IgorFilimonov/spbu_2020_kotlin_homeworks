@@ -28,6 +28,11 @@ fun intInput(message: String): Int {
     return readLine()?.toIntOrNull() ?: error("This is not an integer")
 }
 
+fun pathInput(): String {
+    println("Enter the file path:")
+    return readLine() ?: error("This is not a string")
+}
+
 fun executeCommand(typeOfCommand: Int, storage: PerformedCommandStorage) {
     when (typeOfCommand - 1) {
         Commands.ADD_TO_BEGINNING.ordinal -> AddToBeginning(intInput("Enter value:")).perform(storage)
@@ -38,16 +43,8 @@ fun executeCommand(typeOfCommand: Int, storage: PerformedCommandStorage) {
             println("Numbers:")
             storage.printNumbers()
         }
-        Commands.DO_ACTIONS_FROM_FILE.ordinal -> {
-            println("Enter the file path:")
-            val inputFile = readLine() ?: error("This is not a string")
-            storage.doActionsFromFile(inputFile)
-        }
-        Commands.WRITE_ACTIONS_TO_FILE.ordinal -> {
-            println("Enter the file path:")
-            val outputFile = readLine() ?: error("This is not a string")
-            storage.writeActionsToFile(outputFile)
-        }
+        Commands.DO_ACTIONS_FROM_FILE.ordinal -> storage.doActionsFromFile(pathInput())
+        Commands.WRITE_ACTIONS_TO_FILE.ordinal -> storage.writeActionsToFile(pathInput())
         else -> error("Invalid command")
     }
 }

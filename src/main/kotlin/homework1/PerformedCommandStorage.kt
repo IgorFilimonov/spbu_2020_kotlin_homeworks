@@ -43,9 +43,7 @@ class PerformedCommandStorage {
 
     fun doActionsFromFile(inputFile: String) {
         val actionsFromFile: MutableList<Action> = Json.decodeFromString(File(inputFile).readText())
-        for (action in actionsFromFile) {
-            action.perform(this)
-        }
+        actionsFromFile.forEach { it.perform(this) }
     }
 
     fun writeActionsToFile(outputFile: String) {
