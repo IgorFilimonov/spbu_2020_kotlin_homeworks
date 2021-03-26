@@ -1,5 +1,10 @@
 package homework1
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.File
+
 /**
  * Stores a set of actions performed on a list of integers and can undo them.
  */
@@ -23,16 +28,27 @@ class PerformedCommandStorage {
         if (actions.isEmpty()) {
             println("No actions to cancel")
         } else {
-            actions.last().cancel()
+            actions.last().cancel(this)
             actions.removeLast()
         }
     }
 
     fun printNumbers() {
         if (numbers.isEmpty()) {
-            throw IllegalStateException("No numbers to print")
+            error("No numbers to print")
         } else {
             println(numbers.joinToString(" "))
         }
+    }
+
+    fun doActionsFromFile(inputFile: String) {
+        val actionsFromFile: MutableList<Action> = Json.decodeFromString(File(inputFile).readText())
+        for (action in actionsFromFile) {
+            action.perform(this)
+        }
+    }
+
+    fun writeActionsToFile(outputFile: String) {
+        File(outputFile).writeText(Json.encodeToString(actions))
     }
 }
