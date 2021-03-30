@@ -2,10 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URL
 
 plugins {
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.4.31"
     id("io.gitlab.arturbosch.detekt") version "1.15.0"
     application
     id("org.jetbrains.dokka") version "1.4.30"
+    kotlin("plugin.serialization") version "1.4.31"
 }
 
 group = "me.user"
@@ -20,6 +21,7 @@ dependencies {
     testImplementation(kotlin("test-junit"))
 
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.14.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 }
 
 detekt {
