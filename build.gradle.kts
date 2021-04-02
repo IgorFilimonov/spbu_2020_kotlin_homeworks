@@ -18,10 +18,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test-junit"))
-
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.14.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+    implementation("com.charleskorn.kaml:kaml:0.29.0")
+    implementation("com.squareup:kotlinpoet:1.8.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 }
 
 detekt {
@@ -31,7 +32,7 @@ detekt {
 }
 
 tasks.test {
-    useJUnit()
+    useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile>() {
