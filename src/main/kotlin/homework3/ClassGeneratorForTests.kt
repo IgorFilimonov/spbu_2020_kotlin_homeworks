@@ -30,7 +30,7 @@ data class Config(
 )
 
 class ClassGeneratorForTests(private val yamlPath: String) {
-    private var config = Yaml.default.decodeFromString(Config.serializer(), File(yamlPath).readText())
+    private val config = Yaml.default.decodeFromString(Config.serializer(), File(yamlPath).readText())
 
     /**
      * Returns a class with tests already added.
