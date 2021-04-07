@@ -1,0 +1,7 @@
+package name: homework1
+class name: PerformedCommandStorage
+functions:
+ - name: "forwardApply"
+ - name: "backwardApply"
+ - name: "move"
+ - name: "someAction"
