@@ -1,7 +1,7 @@
 package homework4
 
 @Suppress("TooManyFunctions")
-class AVLNode<K : Comparable<K>, V>(private val privateKey: K, private var privateValue: V) : MutableMap.MutableEntry<K, V> {
+class AVLNode<K : Comparable<K>, V>(private val myKey: K, private var myValue: V) : MutableMap.MutableEntry<K, V> {
     private var height = 1
     private var leftChild: AVLNode<K, V>? = null
     private var rightChild: AVLNode<K, V>? = null
@@ -9,14 +9,14 @@ class AVLNode<K : Comparable<K>, V>(private val privateKey: K, private var priva
         get() = (rightChild?.height ?: 0) - (leftChild?.height ?: 0)
 
     override val key: K
-        get() = privateKey
+        get() = myKey
 
     override val value: V
-        get() = privateValue
+        get() = myValue
 
     override fun setValue(newValue: V): V {
-        val oldValue = privateValue
-        privateValue = newValue
+        val oldValue = myValue
+        myValue = newValue
         return oldValue
     }
 
@@ -64,7 +64,7 @@ class AVLNode<K : Comparable<K>, V>(private val privateKey: K, private var priva
         var oldValue: V? = null
         if (this.key == key) {
             oldValue = this.value
-            this.privateValue = value
+            this.myValue = value
         } else if (this.key.compareTo(key) < 0) {
             if (rightChild == null) {
                 rightChild = AVLNode(key, value)
