@@ -15,9 +15,9 @@ class AVL<K : Comparable<K>, V> : MutableMap<K, V> {
 
     override val entries: MutableSet<MutableMap.MutableEntry<K, V>>
         get() {
-            val _entries = mutableSetOf<MutableMap.MutableEntry<K, V>>()
-            root?.getEntries(_entries)
-            return _entries
+            val tempEntries = mutableSetOf<MutableMap.MutableEntry<K, V>>()
+            root?.getEntries(tempEntries)
+            return tempEntries
         }
 
     override fun get(key: K): V? = root?.getRecursive(key)
@@ -26,9 +26,9 @@ class AVL<K : Comparable<K>, V> : MutableMap<K, V> {
 
     override val keys: MutableSet<K>
         get() {
-            val _keys = mutableSetOf<K>()
-            entries.forEach { _keys.add(it.key) }
-            return _keys
+            val tempKeys = mutableSetOf<K>()
+            entries.forEach { tempKeys.add(it.key) }
+            return tempKeys
         }
 
     override fun put(key: K, value: V): V? {
@@ -64,8 +64,8 @@ class AVL<K : Comparable<K>, V> : MutableMap<K, V> {
 
     override val values: MutableCollection<V>
         get() {
-            val _values: MutableCollection<V> = mutableSetOf<V>()
-            entries.forEach { _values.add(it.value) }
-            return _values
+            val tempValues: MutableCollection<V> = mutableSetOf<V>()
+            entries.forEach { tempValues.add(it.value) }
+            return tempValues
         }
 }

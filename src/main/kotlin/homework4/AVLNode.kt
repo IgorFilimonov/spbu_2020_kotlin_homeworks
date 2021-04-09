@@ -1,6 +1,7 @@
 package homework4
 
-class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) : MutableMap.MutableEntry<K, V> {
+@Suppress("TooManyFunctions")
+class AVLNode<K : Comparable<K>, V>(private val privateKey: K, private var privateValue: V) : MutableMap.MutableEntry<K, V> {
     private var height = 1
     private var leftChild: AVLNode<K, V>? = null
     private var rightChild: AVLNode<K, V>? = null
@@ -8,14 +9,14 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         get() = (rightChild?.height ?: 0) - (leftChild?.height ?: 0)
 
     override val key: K
-        get() = _key
+        get() = privateKey
 
     override val value: V
-        get() = _value
+        get() = privateValue
 
     override fun setValue(newValue: V): V {
-        val oldValue = _value
-        _value = newValue
+        val oldValue = privateValue
+        privateValue = newValue
         return oldValue
     }
 
@@ -63,7 +64,7 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         var oldValue: V? = null
         if (this.key == key) {
             oldValue = this.value
-            this._value = value
+            this.privateValue = value
         } else if (this.key.compareTo(key) < 0) {
             if (rightChild == null) {
                 rightChild = AVLNode(key, value)
@@ -91,12 +92,10 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
     }
 
     fun getRecursive(key: K): V? {
-        if (this.key == key) {
-            return value
-        } else if (this.key.compareTo(key) < 0) {
-            return rightChild?.getRecursive(key)
-        } else {
-            return leftChild?.getRecursive(key)
+        return when {
+            this.key == key -> value
+            this.key.compareTo(key) < 0 -> rightChild?.getRecursive(key)
+            else -> leftChild?.getRecursive(key)
         }
     }
 
@@ -105,14 +104,14 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         leftChild?.containsValueRecursive(value) ?: false ||
         rightChild?.containsValueRecursive(value) ?: false
 
-    private fun changeParent(parentOfNode: AVLNode<K, V>?, newChild: AVLNode<K, V>?, root: AVLNode<K, V>): AVLNode<K, V>? {
-        if (parentOfNode == null) {
+    private fun changeParent(parent: AVLNode<K, V>?, newChild: AVLNode<K, V>?, root: AVLNode<K, V>): AVLNode<K, V>? {
+        if (parent == null) {
             return newChild
         }
-        if (parentOfNode.leftChild == this) {
-            parentOfNode.leftChild = newChild
+        if (parent.leftChild == this) {
+            parent.leftChild = newChild
         } else {
-            parentOfNode.rightChild = newChild
+            parent.rightChild = newChild
         }
         return root
     }
