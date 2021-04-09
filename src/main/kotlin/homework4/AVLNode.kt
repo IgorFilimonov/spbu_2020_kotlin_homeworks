@@ -130,7 +130,7 @@ class AVLNode<K : Comparable<K>, V>(private val myKey: K, private var myValue: V
     fun removeRecursive(key: K, root: AVLNode<K, V>, parent: AVLNode<K, V>? = null): AVLNode<K, V>? {
         var newRoot: AVLNode<K, V>?
         if (this.key == key) {
-            if (rightChild == null || leftChild == null) {
+            if (rightChild == null && leftChild == null) {
                 newRoot = changeParent(parent, null, root)
             } else if (leftChild == null) {
                 newRoot = changeParent(parent, rightChild, root)

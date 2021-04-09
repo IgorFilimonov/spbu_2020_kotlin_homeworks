@@ -41,6 +41,7 @@ class AVL<K : Comparable<K>, V> : MutableMap<K, V> {
         val oldValue = root?.putRecursive(key, value)
         if (oldValue == null) {
             root = root?.balance()
+            ++_size
         }
         return oldValue
     }
