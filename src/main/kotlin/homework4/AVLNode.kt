@@ -19,7 +19,7 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         return oldValue
     }
 
-    fun rotateLeft(): AVLNode<K, V> {
+    private fun rotateLeft(): AVLNode<K, V> {
         val pivot = rightChild!!
         rightChild = pivot.leftChild
         pivot.leftChild = this
@@ -28,7 +28,7 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         return pivot
     }
 
-    fun rotateRight(): AVLNode<K, V> {
+    private fun rotateRight(): AVLNode<K, V> {
         val pivot = leftChild!!
         leftChild = pivot.rightChild
         pivot.rightChild = this
@@ -55,7 +55,7 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         }
     }
 
-    fun updateHeight() {
+    private fun updateHeight() {
         height = maxOf(leftChild?.height ?: 0, rightChild?.height ?: 0) + 1
     }
 
@@ -105,7 +105,7 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         leftChild?.containsValueRecursive(value) ?: false ||
         rightChild?.containsValueRecursive(value) ?: false
 
-    fun changeParent(parentOfNode: AVLNode<K, V>?, newChild: AVLNode<K, V>?, root: AVLNode<K, V>): AVLNode<K, V>? {
+    private fun changeParent(parentOfNode: AVLNode<K, V>?, newChild: AVLNode<K, V>?, root: AVLNode<K, V>): AVLNode<K, V>? {
         if (parentOfNode == null) {
             return newChild
         }
@@ -117,7 +117,7 @@ class AVLNode<K : Comparable<K>, V>(private val _key: K, private var _value: V) 
         return root
     }
 
-    fun cutMaximumOfSmallerNodes(parent: AVLNode<K, V>, root: AVLNode<K, V>): AVLNode<K, V> {
+    private fun cutMaximumOfSmallerNodes(parent: AVLNode<K, V>, root: AVLNode<K, V>): AVLNode<K, V> {
         if (rightChild == null) {
             changeParent(parent, leftChild, root)
             return this
