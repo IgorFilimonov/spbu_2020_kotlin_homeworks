@@ -8,10 +8,10 @@ internal class AddToBeginningTest {
 
     @Test
     fun performAction() {
-        AddToBeginning(3).perform(storage)
+        AddToBeginning(4).perform(storage)
         AddToBeginning(2).perform(storage)
         AddToBeginning(1).perform(storage)
-        assertEquals(listOf(1, 2, 3), storage.numbers)
+        assertEquals(listOf(1, 2, 4), storage.numbers)
     }
 
     @Test
