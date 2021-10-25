@@ -44,9 +44,9 @@ class GameController : Controller() {
     fun makeMove(row: Int, column: Int) {
         val button = find<GameView>().root.lookup("#${row * GRID_SIZE + column}") as Button
         if (button.text == " ") {
-            if (model.movesAmount % 2 == 0)
+            if (model.movesAmount % 2 == 0) {
                 button.text = "X"
-            else
+            } else
                 button.text = "O"
             model.makeMove(row, column)
         }

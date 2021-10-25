@@ -78,12 +78,13 @@ class GameModel(private val controller: GameController) {
     }
 
     fun triggerBot() {
-        if (controller.isBotEnabled
-            && (movesAmount % 2 == 0 && controller.botSide == 'X'
-                    || movesAmount % 2 == 1 && controller.botSide == 'O')
-        ) {
-            val move = bot.makeMove(grid)
-            controller.makeMove(move.row, move.column)
+        if (controller.isBotEnabled) {
+            if (movesAmount % 2 == 0 && controller.botSide == 'X'
+                || movesAmount % 2 == 1 && controller.botSide == 'O'
+            ) {
+                val move = bot.makeMove(grid)
+                controller.makeMove(move.row, move.column)
+            }
         }
     }
 }
