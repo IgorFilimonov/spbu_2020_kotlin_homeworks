@@ -19,9 +19,9 @@ class StartView: View() {
     }
 }
 
-class UrlView: View() {
+class UrlFragment: Fragment() {
     val result: String by param()
     override val root = vbox {
-        label()
+        label(result)
     }
 }

@@ -20,10 +20,16 @@ data class Url(
 )
 
 class SearchEngine {
-    fun run(text: String) {
+    companion object {
+        const val URL_AMOUNT = 10
+    }
+
+    var result = String()
+    fun run(text: String): String {
         runBlocking {
             launch { getUrls(text) }
         }
+        return result
     }
 
     fun getUrls(text: String) {
@@ -31,8 +37,8 @@ class SearchEngine {
         val jsonResult = requestGet(URL(query))
         val json = Json { ignoreUnknownKeys = true }
         val urls = json.decodeFromString<UrlList>(jsonResult)
-        for (i in 0 until 10)
-            println(urls.results[i].url)
+        for (i in 0 until URL_AMOUNT)
+            result += "\n${urls.results[i].url}"
     }
 
     private fun requestGet(url: URL): String {
