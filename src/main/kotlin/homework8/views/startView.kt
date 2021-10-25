@@ -1,3 +1,4 @@
+@file: Suppress("NoWildcardImports", "WildcardImports")
 package homework8.views
 
 import homework8.GameController

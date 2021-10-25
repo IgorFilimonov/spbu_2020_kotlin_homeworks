@@ -33,8 +33,9 @@ class GameModel(private val controller: GameController) {
                     break
                 }
             }
-            if (!isDifference && grid[i][0] != ' ')
+            if (!isDifference && grid[i][0] != ' ') {
                 return GameStages.WIN_OR_LOSE
+            }
         }
         for (i in 0 until GRID_SIZE) {
             var isDifference = false
@@ -44,8 +45,9 @@ class GameModel(private val controller: GameController) {
                     break
                 }
             }
-            if (!isDifference && grid[0][i] != ' ')
+            if (!isDifference && grid[0][i] != ' ') {
                 return GameStages.WIN_OR_LOSE
+            }
         }
         for (i in 1 until GRID_SIZE) {
             if (grid[i][i] == grid[0][0]) {

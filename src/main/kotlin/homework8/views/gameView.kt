@@ -9,6 +9,7 @@ import tornadofx.*
 class GameView : View() {
     companion object {
         const val GRID_SIZE = 3
+        const val PREF_SIZE = 50.0
     }
 
     private val controller: GameController by inject()
@@ -23,7 +24,7 @@ class GameView : View() {
                                 controller.makeMove(i, j)
                             }
                         }
-                        setPrefSize(50.0, 50.0)
+                        setPrefSize(PREF_SIZE, PREF_SIZE)
                         contentDisplay = ContentDisplay.CENTER
                     }
                 }
@@ -33,13 +34,16 @@ class GameView : View() {
 }
 
 class EndGameFragment : Fragment() {
+    companion object {
+        const val MARGIN_TOP = 10.0
+    }
     val message: String by param()
     override val root = vbox {
         this.alignment = Pos.CENTER
         label(message)
         button("Go to the menu") {
             vboxConstraints {
-                marginTop = 10.0
+                marginTop = MARGIN_TOP
             }
             action {
                 find<GameView>().replaceWith<StartView>()
