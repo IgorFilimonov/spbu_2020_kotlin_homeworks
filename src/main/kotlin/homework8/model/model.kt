@@ -1,4 +1,4 @@
-@file: Suppress("Filename", "MatchingDeclarationName", "ReturnCount")
+@file: Suppress("Filename", "MatchingDeclarationName", "ReturnCount", "ComplexMethod", "ComplexCondition", "ChainWrapping")
 package homework8.model
 
 import homework8.GameController
