@@ -8,6 +8,7 @@ plugins {
     application
     id("org.jetbrains.dokka") version "1.4.30"
     kotlin("plugin.serialization") version "1.4.31"
+    id("org.openjfx.javafxplugin") version "0.0.8"
 }
 
 group = "me.user"
@@ -24,12 +25,22 @@ dependencies {
     implementation("com.charleskorn.kaml:kaml:0.29.0")
     implementation("com.squareup:kotlinpoet:1.8.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
+    implementation("no.tornado:tornadofx:1.7.20")
+    implementation("org.openjfx:javafx-base:11.0.2")
+    implementation("org.openjfx:javafx:11.0.2")
+    implementation("org.openjfx:javafx-controls:11.0.2")
+    implementation ("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
 }
 
 detekt {
     failFast = true // fail build on any finding
     config = files("config/detekt/detekt.yml")
     buildUponDefaultConfig = true
+}
+
+javafx {
+    modules("javafx.controls")
 }
 
 tasks.test {

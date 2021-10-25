@@ -6,6 +6,8 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @Serializable
 data class UrlList(
@@ -18,6 +20,12 @@ data class Url(
 )
 
 class SearchEngine {
+    fun run(text: String) {
+        runBlocking {
+            launch { getUrls(text) }
+        }
+    }
+
     fun getUrls(text: String) {
         val query = "https://searx.roughs.ru/search?q=$text&format=json"
         val jsonResult = requestGet(URL(query))
