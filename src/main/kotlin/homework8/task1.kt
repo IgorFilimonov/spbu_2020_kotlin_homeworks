@@ -1,3 +1,4 @@
+@file: Suppress("MatchingDeclarationName")
 package homework8
 
 import homework8.views.StartView

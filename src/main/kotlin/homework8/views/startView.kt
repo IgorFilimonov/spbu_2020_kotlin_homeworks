@@ -10,6 +10,7 @@ import tornadofx.*
 class StartView : View() {
     companion object {
         const val PREF_SIZE = 150.0
+        const val PREF_WIDTH = 109.0
     }
     private val controller: GameController by inject()
     override val root = vbox {
@@ -21,7 +22,7 @@ class StartView : View() {
             }
         }
         button("Play with bot") {
-            prefWidth = 109.0
+            prefWidth = PREF_WIDTH
             action {
                 controller.isBotEnabled = true
                 find<SettingGameFragment>().openModal(stageStyle = StageStyle.TRANSPARENT)
