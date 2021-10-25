@@ -13,17 +13,15 @@ class GameModel(private val controller: GameController) {
     private val bot = if (controller.isBotEasy) EasyBot() else EasyBot()
 
     fun makeMove(row: Int, column: Int) {
-        grid[row][column] = if (movesAmount % 2 == 0)
-            'X'
-        else
-            'O'
+        grid[row][column] = if (movesAmount % 2 == 0) 'X' else 'O'
         movesAmount++
 
         val stage = checkStage()
-        if (stage != GameStages.ONGOING)
+        if (stage != GameStages.ONGOING) {
             controller.finishGame(stage)
-        else
+        } else {
             triggerBot()
+        }
     }
 
     private fun checkStage(): GameStages {

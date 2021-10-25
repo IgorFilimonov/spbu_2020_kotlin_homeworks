@@ -46,23 +46,26 @@ class GameController : Controller() {
         if (button.text == " ") {
             if (model.movesAmount % 2 == 0) {
                 button.text = "X"
-            } else
+            } else {
                 button.text = "O"
+            }
             model.makeMove(row, column)
         }
     }
 
     fun finishGame(result: GameStages) {
-        val lastSymbol = if (model.movesAmount % 2 == 0)
-            'O'
-        else
-            'X'
-        if (result == GameStages.WIN_OR_LOSE)
-            find<EndGameFragment>(Pair(EndGameFragment::message,
-                "Player $lastSymbol has won!"))
+        val lastSymbol = if (model.movesAmount % 2 == 0) 'O' else 'X'
+        if (result == GameStages.WIN_OR_LOSE) {
+            find<EndGameFragment>(
+                Pair(
+                    EndGameFragment::message,
+                    "Player $lastSymbol has won!"
+                )
+            )
                 .openModal(stageStyle = StageStyle.TRANSPARENT)
-        else
+        } else {
             find<EndGameFragment>(Pair(EndGameFragment::message, "Tie!"))
                 .openModal(stageStyle = StageStyle.TRANSPARENT)
+        }
     }
 }
