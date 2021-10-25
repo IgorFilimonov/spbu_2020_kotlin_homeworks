@@ -4,7 +4,7 @@ import javafx.geometry.Pos
 import javafx.scene.control.TextField
 import tornadofx.*
 
-class StartView: View() {
+class StartView : View() {
     private val controller: BrowserController by inject()
     var query: TextField by singleAssign()
     override val root = hbox {
@@ -19,7 +19,7 @@ class StartView: View() {
     }
 }
 
-class UrlFragment: Fragment() {
+class UrlFragment : Fragment() {
     val result: String by param()
     override val root = vbox {
         label(result)

@@ -45,7 +45,7 @@ class SearchEngine {
         var result = ""
         with(url.openConnection() as HttpURLConnection) {
             requestMethod = "GET"
-            inputStream.bufferedReader().use {it.lines().forEach { line -> result += line }}
+            inputStream.bufferedReader().use { it.lines().forEach { line -> result += line } }
         }
         return result
     }
