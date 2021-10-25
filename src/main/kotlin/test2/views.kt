@@ -5,6 +5,10 @@ import javafx.scene.control.TextField
 import tornadofx.*
 
 class StartView : View() {
+    companion object {
+        const val prefSize = 500.0
+    }
+    
     private val controller: BrowserController by inject()
     var query: TextField by singleAssign()
     override val root = hbox {
@@ -15,7 +19,7 @@ class StartView : View() {
                 controller.find()
             }
         }
-        setPrefSize(500.0, 500.0)
+        setPrefSize(prefSize, prefSize)
     }
 }
 
