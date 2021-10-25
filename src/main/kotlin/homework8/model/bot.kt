@@ -13,8 +13,9 @@ class EasyBot : Bot {
         val possibleMoves = mutableListOf<Move>()
         for (i in 0 until GameModel.GRID_SIZE) {
             for (j in 0 until GameModel.GRID_SIZE) {
-                if (grid[i][j] == ' ')
+                if (grid[i][j] == ' ') {
                     possibleMoves.add(Move(i, j))
+                }
             }
         }
         return possibleMoves

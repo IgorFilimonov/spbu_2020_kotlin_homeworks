@@ -1,4 +1,4 @@
-@file: Suppress("NoWildcardImports", "WildcardImports")
+@file: Suppress("NoWildcardImports", "WildcardImport")
 package homework8.views
 
 import homework8.GameController
@@ -8,6 +8,9 @@ import javafx.stage.StageStyle
 import tornadofx.*
 
 class StartView : View() {
+    companion object {
+        const val PREF_SIZE = 150.0
+    }
     private val controller: GameController by inject()
     override val root = vbox {
         this.alignment = Pos.CENTER
@@ -24,11 +27,14 @@ class StartView : View() {
                 find<SettingGameFragment>().openModal(stageStyle = StageStyle.TRANSPARENT)
             }
         }
-        setPrefSize(150.0, 150.0)
+        setPrefSize(PREF_SIZE, PREF_SIZE)
     }
 }
 
 class SettingGameFragment : Fragment() {
+    companion object {
+        const val MARGIN_BOTTOM = 20.0
+    }
     private val controller: GameController by inject()
     private val sideChoice = ToggleGroup()
     private val botDifficulty = ToggleGroup()
@@ -53,7 +59,7 @@ class SettingGameFragment : Fragment() {
         label("Choose a bot difficulty")
         hbox {
             vboxConstraints {
-                marginBottom = 20.0
+                marginBottom = MARGIN_BOTTOM
             }
             this.alignment = Pos.CENTER
             togglebutton("Easy", botDifficulty) {

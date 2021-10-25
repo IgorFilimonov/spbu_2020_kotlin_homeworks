@@ -16,7 +16,7 @@ class GameModel(private val controller: GameController) {
         grid[row][column] = if (movesAmount % 2 == 0) 'X' else 'O'
         movesAmount++
 
-        val stage = checkStage()
+        val stage = getStage()
         if (stage != GameStages.ONGOING) {
             controller.finishGame(stage)
         } else {
@@ -24,7 +24,7 @@ class GameModel(private val controller: GameController) {
         }
     }
 
-    private fun checkStage(): GameStages {
+    private fun getStage(): GameStages {
         for (i in 0 until GRID_SIZE) {
             var isDifference = false
             for (j in 1 until GRID_SIZE) {
